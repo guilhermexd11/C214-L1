@@ -5,6 +5,23 @@
 	let mostrarPesoIdeal = false;
 	let pesoMax = 0;
 	let pesoMin = 0;
+	let recomendacaoDieta = "";
+
+	const recomendacoesDieta = {
+    "Abaixo do Peso": "Tente consumir alimentos ricos em nutrientes e calorias, como grãos integrais, proteínas magras, legumes, frutas e gorduras saudáveis.
+					   Inclua fontes de proteína, como carnes magras, peixe, ovos, leguminosas e produtos lácteos.
+					   Evite alimentos muito processados e opte por opções mais naturais e nutritivas.",
+    "Peso Ideal": "Mantenha uma alimentação equilibrada com uma variedade de alimentos, incluindo frutas, legumes, proteínas magras, grãos integrais e gorduras saudáveis.
+				   Monitore as porções para garantir que você está obtendo nutrientes suficientes sem exceder suas necessidades calóricas.",
+    "Acima do Peso": "Concentre-se em alimentos ricos em nutrientes e reduza a ingestão de calorias vazias, como açúcares refinados e alimentos processados.
+					  Priorize porções controladas e evite comer em excesso.",
+    "Obesidade Grau 1": "Consulte um profissional de saúde ou nutricionista para um plano alimentar personalizado.
+						 Priorize alimentos integrais, ricos em fibras, e evite alimentos ultraprocessados e ricos em açúcares.",
+    "Obesidade Grau 2": "É altamente recomendado consultar um profissional de saúde ou nutricionista para um plano alimentar específico.
+						 Concentre-se em uma dieta equilibrada e nutritiva, com ênfase na redução da ingestão calórica e aumento da atividade física.",
+    "Obesidade Grau 3": "Procure orientação profissional para um plano alimentar seguro e eficaz.
+						 É crucial adotar medidas significativas para reduzir o peso, o que pode incluir intervenções médicas supervisionadas.",
+  };
 
 	function calcularIMC(){
 		if(peso>0 && altura>0){
@@ -15,6 +32,20 @@
 			imc = 0;
 		}
 	}
+
+	if (imc <= 18.5) {
+        recomendacaoDieta = recomendacoesDieta["Abaixo do Peso"];
+      } else if (imc < 25) {
+        recomendacaoDieta = recomendacoesDieta["Peso Ideal"];
+      } else if (imc < 30) {
+        recomendacaoDieta = recomendacoesDieta["Acima do Peso"];
+      } else if (imc < 35) {
+        recomendacaoDieta = recomendacoesDieta["Obesidade Grau 1"];
+      } else if (imc < 40) {
+        recomendacaoDieta = recomendacoesDieta["Obesidade Grau 2"];
+      } else {
+        recomendacaoDieta = recomendacoesDieta["Obesidade Grau 3"];
+      }
 
 	function controlaPesoIdeal(){
 		mostrarPesoIdeal = !mostrarPesoIdeal
@@ -55,6 +86,9 @@
 		{#if mostrarPesoIdeal}
 			<p>Seu peso ideal é de {pesoMin} a {pesoMax}</p>
 		{/if}
+		{#if recomendacaoDieta}
+    		<p>Recomendação de Dieta: {recomendacaoDieta}</p>
+  		{/if}
 	{/if}
 	
 </main>
